@@ -3,7 +3,7 @@
       # the user's working directory and thus be accessible to them
       # throughout the lesson.
 lesson_dir <- file.path(path.package("swirl"), "Courses",
-                        "Umgang_mit_Daten", "Daten_einlesen_und_Teilmengen_erstellen")
+                        "Grafiken", "Grafiken")
 
 ### To make the data available, you have two options:
 
