@@ -1,0 +1,188 @@
+- Class: meta
+  Course: Grafiken
+  Lesson: Grafiken
+  Author: Simon Stuber
+  Type: Standard
+  Organization: Universitaet Koblenz/Landau
+  Version: 2.4.5
+
+- Class: text
+  Output: Willkommen zur dritten Swirl Lesson. Heute beschaeftigen wir uns mit Grafiken in R. Es gibt mehrere Wege Grafiken in R zu erstellen. Wir werden uns in dieser Lesson nur mit einigen der sogenannten "base R" Funktionen beschaeftigen. Das sind Funktionen fuer welche kein Paket benoetigt wird. Die "base R graphics" sind relativ einfach und schnell zu erstellen. Wer ausgefeiltere Grafiken in R erstellen moechte, kann das Paket "ggplot2" verwenden.  
+
+- Class: text
+  Output: Wir beginnen mit dem Histogramm. Bevor wir Grafiken erstellen koennen, muessen wir natuerlich zuerst unsere Daten einlesen. Wie in der letzten Lesson, koennen Sie die Daten einfach mit dem load() Befehl laden.  
+
+- Class: cmd_question
+  Output: Fuehren Sie den Befehl "load(dateipfad_rda)" aus um die Daten zu laden. 
+  CorrectAnswer: load(dateipfad_rda)
+  AnswerTests: omnitest(correctExpr='load(dateipfad_rda)')
+  Hint: Der Befehl lautet "load(dateipfad_rda)"
+
+- Class: text
+  Output: In der Environment ist nun das Objekt "daten" erschienen. Darin sind die Daten gespeichert. Wir wollen nun ein Histrogramm fuer die Skala Lebenszufriedenheit erstellen. zuerst schauen wir uns aber unsere Daten an.  
+
+- Class: cmd_question
+  Output: Fuehren Sie den Befehl "names(daten)" aus um sich die Namen der Variablen im Datensatz anzeigen zu lassen. 
+  CorrectAnswer: names(daten)
+  AnswerTests: omnitest(correctExpr='names(daten)')
+  Hint: Der Befehl lautet "names(daten)". 
+
+- Class: text
+  Output: Wie Sie sehen, lautet der Name der Skala fuer Lebenszufriedenheit "LEZU". Nun koennen wir mit dem hist() Befehl ein Histogramm fuer diese Variable erstellen. Dafuer muessen wir als Input-Argument angeben, dass wir die Variable "LEZU" aus dem Datensatz "daten" verwenden moechten. 
+
+
+
+- Class: mult_question
+  Output: Mit welchem Befehl selektieren Sie die Variable "LEZU" aus dem Objekt "daten"?
+  AnswerChoices: daten$LEZU;LEZU$daten;daten@LEZU
+  CorrectAnswer: daten$LEZU
+  AnswerTests: omnitest(correctVal= 'daten$LEZU')
+  Hint: Mit dem Dollarzeichen geben Sie an, dass Sie eine bestimmte Variable aus dem Datensatz selektieren moechten. 
+
+
+- Class: cmd_question
+  Output: Bevor wir ein Histogramm erstellen, muessen wir uns die Variable genauer anschauen. Lassen Sie sich die Vraiable Lezu nun mit "daten$LEZU"" ausgeben und begutachten Sie die Variable. Was ist der Wertebereich der Variable? Wie viele Punkte liegen zwischen ganzzahligen Einheiten?
+  CorrectAnswer: "daten$LEZU"
+  AnswerTests: omnitest(correctExpr='daten$LEZU')
+  Hint: Der Befehl lautet "daten$LEZU"
+  
+  
+- Class: text
+  Output: Wie Sie sehen, hat diese Variable einen theoretischen Wertebereich von 1-7. Sie koennen auch erkennen, dass die Variable in Schritten von 1/5 zu- bzw. abnimmt. 
+  
+- Class: cmd_question
+  Output: Fuehren Sie nun den hist() Befehl aus. Verwenden Sie als Argument den Befehl um die Variable "LEZU" aus dem Datensatz "daten" zu selektieren. 
+  CorrectAnswer: hist(daten$LEZU)
+  AnswerTests: omnitest(correctExpr='hist(daten$LEZU)')
+  Hint: Der Befehl lautet "hist(daten$LEZU)"
+
+
+- Class: text
+  Output: Wir haben schon festgestell, dass die Variable in Schritten von 1/5 zu- bzw. abnimmt. In dem Histogramm werden diese Zwischenschritte allerdings nicht richtig dargestellt. Hier werden im Moment nur zwei Balken pro Einheit dargestellt anstelle von 5.    
+
+
+- Class: mult_question
+  Output: Wie koennen Sie mit dem breaks Argument festlegen, dass 5 Balken pro Einheit dargestellt werden?
+  AnswerChoices: breaks=seq(1,7, 1/5);breaks=5;breaks=1/5
+  CorrectAnswer:  breaks=seq(1,7, 1/5)
+  AnswerTests: omnitest(correctVal= 'breaks=seq(1,7, 1/5)')
+  Hint: Wir muessen eine Sequenz festlegen die von 1 bis 7 laeuft in Schritten von 0.2. 
+
+- Class: cmd_question
+  Output: Erstellen Sie erneut ein Histogramm fuer die Variable LEZU mit 5 Balken pro Einheit. 
+  CorrectAnswer: hist(daten$LEZU, breaks=seq(1,7,1/5))
+  AnswerTests: omnitest(correctExpr='hist(daten$LEZU, breaks=seq(1,7,1/5))')
+  Hint: Der korrekte Befehl lautet "hist(daten$LEZU, breaks=seq(1,7,1/5))"
+
+- Class: mult_question
+  Output: Mit welchem Argument koennen Sie den Titel der Grafik festlegen?
+  AnswerChoices: main;Title;Header
+  CorrectAnswer: main
+  AnswerTests: omnitest(correctVal= 'main')
+  Hint:
+
+- Class: cmd_question
+  Output: Kopieren Sie ihr letztes Histogramm und aendern Sie den Titel zu "Histogramm Lebenszufriedenheit". Denken Sie daran den Titel in Anfuehrungszeichen zu setzen, da es sich um Textinput handelt. 
+  CorrectAnswer: hist(daten$LEZU, breaks=seq(1,7,1/5), main="Histogramm Lebenszufriedenheit")
+  AnswerTests: omnitest(correctExpr='hist(daten$LEZU, breaks=seq(1,7,1/5), main="Histogramm Lebenszufriedenheit")')
+  Hint: Der korrekte Befehl lautet "hist(daten$LEZU, breaks=seq(1,7,1/5), main="Histogramm Lebenszufriedenheit")"
+
+- Class: cmd_question
+  Output: Kopieren Sie wieder ihr letztes Histogramm und aendern Sie die Achsenbeschriftung mit den Argumenten xlab und ylab. Beschriften Sie die X-Achse mit "Lebenszufriedenheit" und die Y-Achse mit "Frequenz". 
+  CorrectAnswer: hist(daten$LEZU, breaks=seq(1,7,1/5), main="Histogramm Lebenszufriedenheit", xlab="Lebenszufriedenheit", ylab="Frequenz")
+  AnswerTests: omnitest(correctExpr='hist(daten$LEZU, breaks=seq(1,7,1/5), main="Histogramm Lebenszufriedenheit", xlab="Lebenszufriedenheit", ylab="Frequenz")')
+  Hint: hintDer korrekte Befehl lautet "hist(daten$LEZU, breaks=seq(1,7,1/5), main="Histogramm Lebenszufriedenheit", xlab="Lebenszufriedenheit", ylab="Frequenz")"
+
+- Class: text
+  Output: Unser Histogramm sieht nun schon einigermassen gut aus. Allerdings stimmt der Wertebereich der Y-Achse noch nicht. Einige Balken reichen hoeher als die Beschriftung der Y-Achse. Das koennen Sie mit dem Befehl ylim aendern.  
+
+- Class: mult_question
+  Output: Wie koennen Sie festlegen, dass die Y-Achse von 0 bis 40 beschriftet ist?
+  AnswerChoices: ylim=c(0,40);ylim=0:40;ylim=40
+  CorrectAnswer: ylim=c(0,40)
+  AnswerTests: omnitest(correctVal= 'ylim=c(0,40)')
+  Hint: hint
+
+- Class: cmd_question
+  Output: Kopieren Sie wieder ihr letztes Histogramm und legen Sie fest, dass die Y-Achse von 0 bis 40 beschriftet werden soll. 
+  CorrectAnswer: hist(daten$LEZU, breaks=seq(1,7,1/5), main="Histogramm Lebenszufriedenheit", xlab="Lebenszufriedenheit", ylab="Frequenz", ylim=c(0,40))
+  AnswerTests: omnitest(correctExpr='hist(daten$LEZU, breaks=seq(1,7,1/5), main="Histogramm Lebenszufriedenheit", xlab="Lebenszufriedenheit", ylab="Frequenz", ylim=c(0,40))')
+  Hint: Der korrekte Befehl lautet "hist(daten$LEZU, breaks=seq(1,7,1/5), main="Histogramm Lebenszufriedenheit", xlab="Lebenszufriedenheit", ylab="Frequenz", ylim=c(0,40))"
+
+- Class: text
+  Output: Unser Histogramm sieht jetzt gut aus und koennte so in einer Bachelorarbeit verwendet werden. Natuerlich koennen Sie ihre Grafik auch noch weiter bearbeiten. Dafuer stehen ihnen eine Vielzahl von Argumenten zur verfuegung. Auf der Hilfeseite der hist() Funktion werden diese Argumente beschrieben. Neben Histogrammen gibt es noch einige andere Grafiken die mit base R graphics erstellt werden koennen. Viele der Argumente die wir kennengelernt haben, wie z.B. das main Argument, koennen auch fuer andere Grafiken verwendet werden. Wir koennen in dieser swirl Lesson nicht alle Grafiken wiederholen und ueben. Im neachsten Schritt, wollen wir nun gemeinsam eine andere haeufig verwendete Grafik erstellen; den Boxplot.
+  
+  
+
+
+- Class: mult_question
+  Output: Wie koennen Sie einen einfachen Boxplot ohne weitere Argumente erstellen fuer die Variable "LEZU"?
+  AnswerChoices: boxplot(daten$LEZU);boxplot(LEZU);box(daten$LEZU)
+  CorrectAnswer: boxplot(daten$LEZU)
+  AnswerTests: omnitest(correctVal= 'boxplot(daten$LEZU)')
+  Hint: Der korrekte Befehl lautet "boxplot(daten$LEZU)"
+
+- Class: cmd_question
+  Output: Fuehren Sie diesen Befehl nun aus. 
+  CorrectAnswer: boxplot(daten$LEZU)
+  AnswerTests: omnitest(correctExpr='boxplot(daten$LEZU)')
+  Hint: Der korrekte Befehl lautet "boxplot(daten$LEZU)"
+
+- Class: mult_question
+  Output: Wo liegt das 3. Quartil?
+  AnswerChoices: Bei ungefaehr 6;Bei ungefaehr 5.5 ; Bei ungefaehr 3.
+  CorrectAnswer: Bei ungefaehr 6
+  AnswerTests: omnitest(correctVal= 'Bei ungefaehr 6')
+  Hint: Das dritte Quartil ist das Quartil ueber dem Medianwert. 
+
+- Class: mult_question
+  Output: Wie koennen Sie der Grafik den Titel "Boxplot Lebenszufriedenheit" hinzufuegen?
+  AnswerChoices: boxplot(daten$LEZU, main="Boxplot Lebenszufriedenheit");boxplot(daten$LEZU, title="Boxplot Lebenszufriedenheit");boxplot(daten$LEZU, main=Boxplot Lebenszufriedenheit)
+  CorrectAnswer: boxplot(daten$LEZU, main="Boxplot Lebenszufriedenheit")
+  AnswerTests: omnitest(correctVal= 'boxplot(daten$LEZU, main="Boxplot Lebenszufriedenheit")')
+  Hint: Der Titel muss in Anfuehrungszeichen stehen, da es sich um Textinput handelt. 
+
+- Class: cmd_question
+  Output: Erstellen Sie nun einen Boxplot fuer die Variable "Lebenszufriedenheit" mit dem Titel "Boxplot Lebenszufriedenheit"
+  CorrectAnswer: boxplot(daten$LEZU, main="Boxplot Lebenszufriedenheit")
+  AnswerTests: omnitest(correctExpr='boxplot(daten$LEZU, main="Boxplot Lebenszufriedenheit")')
+  Hint: Der Befehl lautet "boxplot(daten$LEZU, main="Boxplot Lebenszufriedenheit")"
+
+- Class: mult_question
+  Output: Wo liegen die Aussreisser?
+  AnswerChoices: Unter ungefaehr 3; Bei ungefaehr 3 und 7;Ungefaehr ueber 6 und unter ungefaehr 4.8
+  CorrectAnswer: Unter ungefaehr 3
+  AnswerTests: omnitest(correctVal= 'Unter ungefaehr 3')
+  Hint: Die Aussreisser werden als Punkte dargestellt. 
+
+- Class: text
+  Output: Mit de boxplot() Funktion, koennen auch mehrere Boxplots fuer verschiedene Gruppen erstellt werden. Dafuer verwenden wir das Tildesymbol "~". Vor dem Symbol geben wir an, fuer welche Variable wir die Boxplots erstellen wollen, hinter der Tilde geben wir die Variable an, in welcher die Gruppenzugehoerigkeit hinterlegt ist. Wir wollen nun Boxplots erstellen fuer die Variable "LEZU", getrennt nach Geschlecht. Dafuer muessen wir zuerst herausfinden, in welcher Spalte im Datensatz das Geschlecht hinterlegt ist. Schauen Sie sich die Daten mit der View() Funktion an und ermitteln Sie den Namen des entspechenden Faktors.   
+
+
+- Class: mult_question
+  Output: Wie lautet der Name des Faktors in welchem das Geschlecht der Versuchspersonen hinterlegt ist?
+  AnswerChoices: geschl.f;SW;geschl
+  CorrectAnswer: "geschl.f"
+  AnswerTests: omnitest(correctVal= 'geschl.f')
+  Hint: Bei einem Faktor, sind die Faktorstufen mit Labels hinterlegt. 
+
+- Class: cmd_question
+  Output: Kopieren Sie den Befehl fuer den letzten Boxplot und fuegen Sie durch verwendung der Tilde "~" hinzu, dass fuer beide Geschlechter getrennte boxplots erstellt werden sollen. 
+  CorrectAnswer: boxplot(daten$LEZU ~ daten$geschl.f, main="Boxplot Lebenszufriedenheit")
+  AnswerTests: omnitest(correctExpr='boxplot(daten$LEZU ~ daten$geschl.f, main="Boxplot Lebenszufriedenheit")')
+  Hint: Der Befehl lautet "boxplot(daten$LEZU ~ daten$geschl.f, main="Boxplot Lebenszufriedenheit")"
+
+- Class: cmd_question
+  Output: Kopieren Sie den letzten Befehl und fuegen Sie Achsenbeschriftungen hinzu mit den Argumenten xlab und ylab. Benennen Sie die X-Achse "Geschlecht" und die Y-Achse "Lebenszufriedenheit". 
+  CorrectAnswer: boxplot(daten$LEZU ~ daten$geschl.f, main="Boxplot Lebenszufriedenheit", xlab="Geschlecht", ylab="Lebenszufriedenheit")
+  AnswerTests: omnitest(correctExpr='boxplot(daten$LEZU ~ daten$geschl.f, main="Boxplot Lebenszufriedenheit", xlab="Geschlecht", ylab="Lebenszufriedenheit")')
+  Hint: Der korrekte Befehl lautet "boxplot(daten$LEZU ~ daten$geschl.f, main="Boxplot Lebenszufriedenheit", xlab="Geschlecht", ylab="Lebenszufriedenheit")"
+
+- Class: text
+  Output: Unser Boxplot ist nun fertig und koennte so in einer Bacherlorarbeit verwendet werden. 
+
+- Class: text
+  Output: Neben dem Histogramm und dem Boxplot gibt es z.B. die barplot() Funktion um Saeulendiagramme zu erstellen oder die pie() Funktion um Kreisdiagramme zu erstellen. Der Aufbau dieser Funktionen ist sehr aehnlich. Wie immer ist es ratsam beim Arbeiten mit diesen Funktionen die Hilfeseite der Funktion zu oeffnen um die verschiedenen Argumente besser zu verstehen. Gerade fuer Grafiken gibt es sehr viele Beispiele im Internet (die meisten Beispiele findet man mit englischen Suchbegriffen. Suchen Sie am besten explizit nach bestimmten R-Funktionen, z.B; "R barplot example").
+
+- Class: text
+  Output: Das war die vierte Lesson. Bis naechste Woche!
